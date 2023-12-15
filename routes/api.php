@@ -1,8 +1,8 @@
 <?php
 
-use App\Http\Controllers\BookConroller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ProductController;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,12 +15,13 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::resource('products', ProductController::class);
+Route::get('/products/search/{name}', [ProductController::class, 'search']);
+
+// Route::get('/products', [ProductController::class, 'index']);
+// Route::post('/products', [ProductController::class, 'store']);
+
+
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
-
-Route::get('/books', [BookConroller::class, 'index']);
-Route::get('/books/{id}', [BookConroller::class, 'show']);
-Route::post('/books', [BookConroller::class, 'store']);
-Route::put('/books/{id}', [BookConroller::class, 'update']);
-Route::delete('/books/{id}', [BookConroller::class, 'destroy']);
